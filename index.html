@@ -63,11 +63,16 @@ for(var x=-1;x<=1;x++)for(var y=-1;y<=1;y++)for(var z=-1;z<=1;z++){
 }
 
 function fit(){
-  var w=innerWidth,h=innerHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();
+  var w=innerWidth,h=innerHeight;R.setSize(w,h,false);cam.aspect=w/h;
+  var top=document.querySelector('.top').getBoundingClientRect().bottom+16;
+  var bot=document.querySelector('.bar').getBoundingClientRect().top-6;
+  var rh=Math.max(150,bot-top),cy=top+rh/2;
   var t=2*Math.tan(THREE.MathUtils.degToRad(20));
-  var d=Math.max(6.9/t,(5.9/(w/h))/t);cam.position.set(0,0,d);cam.lookAt(0,0,0);
+  var d=Math.max(5.4*h/(.95*rh*t),5.4*h/(.94*w*t));
+  cam.position.set(0,0,d);cam.lookAt(0,0,0);
+  cam.setViewOffset(w,h,0,h/2-cy,w,h);
 }
-addEventListener('resize',fit);fit();
+addEventListener('resize',fit);addEventListener('load',fit);fit();
 
 /* ---- moves ---- */
 var queue=[],anim=null,history=[],state='solved';// solved|scrambling|ready|running|solving
