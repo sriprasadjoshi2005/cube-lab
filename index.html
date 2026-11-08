@@ -66,7 +66,7 @@ function fit(){
   var w=innerWidth,h=innerHeight;R.setSize(w,h,false);cam.aspect=w/h;
   var top=document.querySelector('.top').getBoundingClientRect().bottom+16;
   var bot=document.querySelector('.bar').getBoundingClientRect().top-6;
-  var rh=Math.max(150,bot-top),cy=top+rh/2;
+  var rh=Math.max(150,bot-top),cy=top+rh/2-24;
   var t=2*Math.tan(THREE.MathUtils.degToRad(20));
   var d=Math.max(5.4*h/(1.08*rh*t),5.4*h/(1.02*w*t));
   cam.position.set(0,0,d);cam.lookAt(0,0,0);
